@@ -36,6 +36,16 @@ public class LevelManager : MonoBehaviour
     {
         incorrectPopup.gameObject.SetActive(false);
     }
+    
+    public void Resigned()
+    {
+        incorrectPopup.gameObject.SetActive(true);
+        incorrectPopup.Ok_button.onClick.AddListener(YesClicked);
+    }
+    private void YesClicked()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
 
     public void changeScene()
     {
