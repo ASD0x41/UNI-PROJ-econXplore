@@ -37,25 +37,25 @@ public class F_actors : MonoBehaviour
         {
             owed.text = ((int)(debtOwedC / 1_000_000_000)).ToString();
             limit.text = ((int)(debtLimitC / 1_000_000_000)).ToString();
-            interest.text = ((interestRateC / 1_000_000_000)).ToString();
+            interest.text = ((interestRateC * 100)).ToString() + " %";
         }
         else if(input == "IMF")
         {
             owed.text = ((int)(debtOwedI / 1_000_000_000)).ToString();
             limit.text = ((int)(debtLimitI / 1_000_000_000)).ToString();
-            interest.text = ((interestRateI / 1_000_000_000)).ToString();
+            interest.text = ((interestRateI * 100)).ToString() + " %";
         }
         else if(input == "Arabs")
         {
             owed.text = ((int)(debtOwedA / 1_000_000_000)).ToString();
             limit.text = ((int)(debtLimitA / 1_000_000_000)).ToString();
-            interest.text = ((interestRateA / 1_000_000_000)).ToString();
+            interest.text = ((interestRateA * 100)).ToString() + " %";
         }
         else if(input == "Local")
         {
             owed.text = ((int)(debtOwedL / 1_000_000_000)).ToString();
             limit.text = ((int)(debtLimitL / 1_000_000_000)).ToString();
-            interest.text = ((interestRateL / 1_000_000_000)).ToString();
+            interest.text = ((interestRateL * 100)).ToString() + " %";
         }
     }
 

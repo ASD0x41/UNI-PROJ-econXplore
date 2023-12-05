@@ -7,7 +7,7 @@ using EMG;
 public class Forex_Calculations : MonoBehaviour
 {   
     
-    public Text OldForex;
+
     public Text NewForex;
     public Text Net;
 
@@ -28,7 +28,6 @@ public class Forex_Calculations : MonoBehaviour
         govt.GetCountryFinanceReport(out double assets, out double liabilities, out double forex);
 
         NewForex.text = ((int)(forex / 1_000_000_000)).ToString();
-        Net.text = ((int)(double.Parse(outFlow.text) - double.Parse(inFlow.text))).ToString();
-        OldForex.text = ((int)((forex / 1_000_000_000) - double.Parse(Net.text))).ToString();
+        Net.text = ((int)(double.Parse(inFlow.text) - double.Parse(outFlow.text))).ToString();
     }
 }
