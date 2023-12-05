@@ -24,6 +24,11 @@ namespace EMG
         public static readonly double STARTING_DEBT_ARABS = 20_000_000_000;
         public static readonly double STARTING_DEBT_LOCAL_BANK = 20_000_000_000;
 
+        public static readonly double STARTING_DEBT_LIMIT_CHINA = 40_000_000_000;   //
+        public static readonly double STARTING_DEBT_LIMIT_IMF = 20_000_000_000; //
+        public static readonly double STARTING_DEBT_LIMIT_ARABS = 20_000_000_000;   //
+        public static readonly double STARTING_DEBT_LIMIT_LOCAL = 20_000_000_000;  //
+
         public static readonly double INTEREST_RATE_CHINA = 0.075;
         public static readonly double INTEREST_RATE_IMF = 0.05;
         public static readonly double INTEREST_RATE_ARABS = 0.025;
@@ -59,6 +64,9 @@ namespace EMG
         public static readonly double EVENT_IMP_CULTURAL_FESTIVAL = 1;   //
 
         public static readonly double RAID_ANGER = 1;    //
+
+        public static readonly double STARTING_TREASURY_BALANCE = 500_000_000_000.00;
+        public static readonly double STARTING_FOREX_RESERVES = 10_000_000_000.00;
     }
 
     interface IDataHandler
@@ -100,10 +108,10 @@ namespace EMG
         public double GetInterestRate() { return interestRate; }
         public double GetInterestPaid() { return interestPaid; }
 
-        protected readonly IGameGlobal theGame = Game.GetInstance();
 
         public bool IsAllowed()
         {
+             IGameGlobal theGame = Game.GetInstance();
             if (theGame.GetTurn() - debtTurn > CONSTANTS.COOLDOWN_TURNS)
                 return true;
             else
@@ -151,8 +159,6 @@ namespace EMG
                 return -1;
         }
 
-        protected readonly IGovtForFinancialBody debtor = Govt.GetInstance();
-
         public abstract void Update();
     }
 
@@ -160,10 +166,11 @@ namespace EMG
     {
         static China instance = null;
         public static China GetInstance() => instance == null ? instance = new China() : instance;
-        private China() { debtLimit = interestPaid = 0; interestRate = CONSTANTS.INTEREST_RATE_CHINA; debtRepaid = 1; debtOwed = CONSTANTS.STARTING_DEBT_CHINA; }
+        private China() { debtLimit = CONSTANTS.STARTING_DEBT_LIMIT_CHINA; interestPaid = 0; interestRate = CONSTANTS.INTEREST_RATE_CHINA; debtRepaid = 1; debtOwed = CONSTANTS.STARTING_DEBT_CHINA; }
 
         public override void Update()
         {
+             IGovtForFinancialBody debtor = Govt.GetInstance();
             debtor.GetCountryFinanceReport(out double assets, out double liabilities, out double forex);
             debtLimit = (assets - liabilities) * CONSTANTS.DEBT_LIMIT_MOD_CHINA;
         }
@@ -191,10 +198,11 @@ namespace EMG
     {
         static IMF instance = null;
         public static IMF GetInstance() => instance == null ? instance = new IMF() : instance;
-        private IMF() { debtLimit = interestPaid = 0; interestRate = CONSTANTS.INTEREST_RATE_IMF; debtRepaid = 1; debtOwed = CONSTANTS.STARTING_DEBT_IMF; }
+        private IMF() { debtLimit = CONSTANTS.STARTING_DEBT_LIMIT_IMF; interestPaid = 0; interestRate = CONSTANTS.INTEREST_RATE_IMF; debtRepaid = 1; debtOwed = CONSTANTS.STARTING_DEBT_IMF; }
 
         public override void Update()
         {
+             IGovtForFinancialBody debtor = Govt.GetInstance();
             debtor.GetCountryFinanceReport(out double assets, out double liabilities, out double forex);
             debtLimit = (assets - liabilities) * CONSTANTS.DEBT_LIMIT_MOD_IMF + forex;
         }
@@ -222,10 +230,11 @@ namespace EMG
     {
         static Arabs instance = null;
         public static Arabs GetInstance() => instance == null ? instance = new Arabs() : instance;
-        private Arabs() { debtLimit = interestPaid = 0; interestRate = CONSTANTS.INTEREST_RATE_ARABS; debtRepaid = 1; debtOwed = CONSTANTS.STARTING_DEBT_ARABS; }
+        private Arabs() { debtLimit = CONSTANTS.STARTING_DEBT_LIMIT_ARABS; interestPaid = 0; interestRate = CONSTANTS.INTEREST_RATE_ARABS; debtRepaid = 1; debtOwed = CONSTANTS.STARTING_DEBT_ARABS; }
 
         public override void Update()
         {
+             IGovtForFinancialBody debtor = Govt.GetInstance();
             debtor.GetCountryFinanceReport(out double assets, out double liabilities, out double forex);
             debtLimit = (assets - liabilities - debtOwed) * CONSTANTS.DEBT_LIMIT_MOD_ARABS;
         }
@@ -253,10 +262,11 @@ namespace EMG
     {
         static LocalBank instance = null;
         public static LocalBank GetInstance() => instance == null ? instance = new LocalBank() : instance;
-        private LocalBank() { debtLimit = interestPaid = 0; interestRate = CONSTANTS.INTEREST_RATE_LOCAL_BANK; debtRepaid = 1; debtOwed = CONSTANTS.STARTING_DEBT_LOCAL_BANK; }
+        private LocalBank() { debtLimit = CONSTANTS.STARTING_DEBT_LIMIT_LOCAL; interestPaid = 0; interestRate = CONSTANTS.INTEREST_RATE_LOCAL_BANK; debtRepaid = 1; debtOwed = CONSTANTS.STARTING_DEBT_LOCAL_BANK; }
 
         public override void Update()
         {
+             IGovtForFinancialBody debtor = Govt.GetInstance();
             debtor.GetCountryFinanceReport(out double assets, out double liabilities, out double forex);
             debtLimit = (assets - debtOwed) * CONSTANTS.DEBT_LIMIT_MOD_LOCAL_BANK;
         }
@@ -343,10 +353,11 @@ namespace EMG
                 assets -= amount;
         }
 
-        readonly IGovtForAssetMgmt govt = Govt.GetInstance();
+        
 
         public void Update()
         {
+             IGovtForAssetMgmt govt = Govt.GetInstance();
             double proceeds = SellAssets();
             govt.InformAssetSale(proceeds);
         }
@@ -478,10 +489,10 @@ namespace EMG
             ReComputePopHappiness();
         }
 
-        IGovtForPeople govt = Govt.GetInstance();
 
         void ReComputePopHappiness()
         {
+            IGovtForPeople govt = Govt.GetInstance();
             govt.GetPublicIndicators(out double salary, out double dollarRate, out double taxRate, out double welfare, out double natLevel);
             popHappiness += (int)(salary + welfare - taxRate - dollarRate + natLevel); //
         }
@@ -580,6 +591,7 @@ namespace EMG
         public double GetBalance() { return balance; }
         public double Debit(double amount)
         {
+             IGameOutcome theGame = Game.GetInstance();
             if (amount >= 0)
             {
                 double payable = Math.Min(amount, balance);
@@ -608,7 +620,6 @@ namespace EMG
             balance = initBalance;
         }
 
-        readonly IGameOutcome theGame = Game.GetInstance();
     }
 
 
@@ -690,9 +701,9 @@ namespace EMG
         int actionTurn = -CONSTANTS.COOLDOWN_TURNS;
         bool planConduction = false;
 
-        readonly IGameGlobal theGame = Game.GetInstance();
         public bool IsAllowed()
         {
+             IGameGlobal theGame = Game.GetInstance();
             if (theGame.GetTurn() - actionTurn > CONSTANTS.COOLDOWN_TURNS)
                 return true;
             else
@@ -701,6 +712,7 @@ namespace EMG
 
         public bool IsRaidedRecently()
         {
+             IGameGlobal theGame = Game.GetInstance();
             if (theGame.GetTurn() == actionTurn)
                 return true;
             else
@@ -717,12 +729,13 @@ namespace EMG
             planConduction = false;
         }
 
-        readonly IGovtForBlackMarket govt = Govt.GetInstance();
-        readonly IPeopleForRaid people = People.GetInstance();
+        
+        
         public double Raid()
         {
             if (IsAllowed())
             {
+                IGameGlobal theGame = Game.GetInstance();
                 actionTurn = theGame.GetTurn();
                 planConduction = false;
                 return cashVolume * CONSTANTS.RAID_RATIO;
@@ -733,6 +746,8 @@ namespace EMG
 
         public void Update()
         {
+             IGovtForBlackMarket govt = Govt.GetInstance();
+             IPeopleForRaid people = People.GetInstance();
             double proceeds = Raid();
             govt.InformRaidProceedings(proceeds);
             people.InformRaid(CONSTANTS.RAID_ANGER);
@@ -766,9 +781,10 @@ namespace EMG
         protected int actionTurn = -CONSTANTS.COOLDOWN_TURNS;
         protected bool planConduction = false;
 
-        protected readonly IGameGlobal theGame = Game.GetInstance();
+        
         public bool IsAllowed()
         {
+             IGameGlobal theGame = Game.GetInstance();
             if (theGame.GetTurn() - actionTurn > CONSTANTS.COOLDOWN_TURNS)
                 return true;
             else
@@ -777,6 +793,7 @@ namespace EMG
 
         public bool IsConductedRecently()
         {
+             IGameGlobal theGame = Game.GetInstance();
             if (theGame.GetTurn() == actionTurn)
                 return true;
             else
@@ -797,13 +814,11 @@ namespace EMG
         {
             if (IsAllowed())
             {
+                IGameGlobal theGame = Game.GetInstance();
                 actionTurn = theGame.GetTurn();
                 planConduction = false;
             }
         }
-
-        protected readonly IGovtForPublicEvent govt = Govt.GetInstance();
-        protected readonly IPeopleForEvent people = People.GetInstance();
     }
     class SportsContest : PublicEvent, ISubscriber, IDataHandler
     {
@@ -813,6 +828,8 @@ namespace EMG
 
         public void Update()
         {
+             IGovtForPublicEvent govt = Govt.GetInstance();
+             IPeopleForEvent people = People.GetInstance();
             Conduct();
             govt.InformEventConduction(CONSTANTS.EVENT_COST_SPORTS_FESTIVAL);
             people.InformEvent(CONSTANTS.EVENT_IMP_SPORTS_FESTIVAL);
@@ -841,6 +858,8 @@ namespace EMG
 
         public void Update()
         {
+             IGovtForPublicEvent govt = Govt.GetInstance();
+             IPeopleForEvent people = People.GetInstance();
             Conduct();
             govt.InformEventConduction(CONSTANTS.EVENT_COST_PUBLIC_HOLIDAY);
             people.InformEvent(CONSTANTS.EVENT_IMP_PUBLIC_HOLIDAY);
@@ -866,6 +885,8 @@ namespace EMG
 
         public void Update()
         {
+             IGovtForPublicEvent govt = Govt.GetInstance();
+             IPeopleForEvent people = People.GetInstance();
             Conduct();
             govt.InformEventConduction(CONSTANTS.EVENT_COST_CULTURAL_FESTIVAL);
             people.InformEvent(CONSTANTS.EVENT_IMP_CULTURAL_FESTIVAL);
@@ -988,16 +1009,16 @@ namespace EMG
     class Govt : IGovtMiscControls, IGovtBudgetControls, IGovtInternalProfile, IGovtExternalProfile, IGovtCurrencyExchangeControls, IGovtLocalDebtControls, IGovtChineseDebtControls, IGovtIMFDebtControls, IGovtArabDebtControls, IGovtMiscProfile, IGovtForBlackMarket, IGovtForPublicEvent, IGovtForAssetMgmt, ISubscriber, IGovtForFinancialBody, IDataHandler, IGovtForPeople
     {
         static Govt instance = null;
-        public static Govt GetInstance() => instance == null ? instance = new Govt() : instance;
+        public static Govt GetInstance() => ((instance == null) ? (instance = new Govt()) : (instance));
         private Govt() { }
 
         // IGovtMiscControls:
 
-        readonly IPublicEvent sportsContest = SportsContest.GetInstance();
-        readonly IPublicEvent publicHoliday = PublicHoliday.GetInstance();
-        readonly IPublicEvent culturalFestival = CulturalFestival.GetInstance();
-        readonly IBlackMarket blackMarket = BlackMarket.GetInstance();
-        readonly ICountry country = Country.GetInstance();
+         IPublicEvent sportsContest = SportsContest.GetInstance();
+         IPublicEvent publicHoliday = PublicHoliday.GetInstance();
+         IPublicEvent culturalFestival = CulturalFestival.GetInstance();
+         IBlackMarket blackMarket = BlackMarket.GetInstance();
+         ICountry country = Country.GetInstance();
 
         public void GetDiversionDetails(out bool sports, out bool holiday, out bool festival)
         {
@@ -1042,7 +1063,7 @@ namespace EMG
 
         // IGovtLocalDebtControls:
 
-        readonly IFinancialBody localBank = LocalBank.GetInstance();
+         IFinancialBody localBank = LocalBank.GetInstance();
         double newlocaldebt = 0;
 
         public void GetLocalDebtDetails(out double debtOwed, out double interestRate, out double debtLimit, out bool allowed)
@@ -1059,7 +1080,7 @@ namespace EMG
 
         // IGovtChineseDebtControls:
 
-        readonly IFinancialBody china = China.GetInstance();
+         IFinancialBody china = China.GetInstance();
         double newChinesedebt = 0;
 
         public void GetChineseDebtDetails(out double debtOwed, out double interestRate, out double debtLimit, out bool allowed)
@@ -1076,7 +1097,7 @@ namespace EMG
 
         // IGovtIMFDebtControls:
 
-        readonly IFinancialBody imf = IMF.GetInstance();
+         IFinancialBody imf = IMF.GetInstance();
         double newIMFdebt = 0;
 
         public void GetIMFDebtDetails(out double debtOwed, out double interestRate, out double debtLimit, out bool allowed)
@@ -1093,7 +1114,7 @@ namespace EMG
 
         // IGovtArabDebtControls:
 
-        readonly IFinancialBody arabs = Arabs.GetInstance();
+         IFinancialBody arabs = Arabs.GetInstance();
         double newArabdebt = 0;
 
         public void GetArabDebtDetails(out double debtOwed, out double interestRate, out double debtLimit, out bool allowed)
@@ -1110,9 +1131,9 @@ namespace EMG
 
         // IGovtCurrencyExchangeControls:
 
-        readonly IAccount treasury = new Account();
-        readonly IAccount forexReserve = new Account();
-        readonly IForexMarket forexMarket = ForexMarket.GetInstance();
+         IAccount treasury = new Account(CONSTANTS.STARTING_TREASURY_BALANCE);
+         IAccount forexReserve = new Account(CONSTANTS.STARTING_FOREX_RESERVES);
+         IForexMarket forexMarket = ForexMarket.GetInstance();
         double newForexTrade = 0;
 
         public void GetCurrencyExchangeDetails(out double treasuryBal, out double dollarRate, out double forexReservesBal)
@@ -1318,7 +1339,7 @@ namespace EMG
             {
                 double paid = -newChinesedebt - china.RepayDebt(-newChinesedebt);
                 forexReserve.Debit(paid);
-                oldChineseDebt = paid;
+                oldChineseDebt = -paid;
                 newChinesedebt = 0;
             }
 
@@ -1333,7 +1354,7 @@ namespace EMG
             {
                 double paid = -newIMFdebt - imf.RepayDebt(-newIMFdebt);
                 forexReserve.Debit(paid);
-                oldIMFDebt = paid;
+                oldIMFDebt = -paid;
                 newIMFdebt = 0;
             }
 
@@ -1348,7 +1369,7 @@ namespace EMG
             {
                 double paid = -newArabdebt - arabs.RepayDebt(-newArabdebt);
                 forexReserve.Debit(paid);
-                oldArabDebt = paid;
+                oldArabDebt = -paid;
                 newArabdebt = 0;
             }
         }
@@ -1365,7 +1386,7 @@ namespace EMG
             {
                 double paid = -newlocaldebt - localBank.RepayDebt(-newlocaldebt);
                 treasury.Debit(paid);
-                oldLocalDebt = paid;
+                oldLocalDebt = -paid;
                 newlocaldebt = 0;
             }
         }
@@ -1426,7 +1447,7 @@ namespace EMG
         public void GetLocalPaymentDetails(out double debtTaken, out double debtRepaid, out double interestPaid)
         {
             debtTaken = oldLocalDebt > 0 ? oldLocalDebt : 0;
-            debtRepaid = oldLocalDebt < 0 ? oldLocalDebt : 0;
+            debtRepaid = oldLocalDebt < 0 ? -oldLocalDebt : 0;
             interestPaid = localInterest;
         }
         public void GetMiscFinancialDetails(out double diversion, out double raidProceeds)
@@ -1454,10 +1475,10 @@ namespace EMG
             exports = traders.GetExports();
         }
         public void GetForeignDebtPayments(out double china, out double arabs, out double imf)
-        {
-            china = oldChineseDebt < 0 ? oldChineseDebt : 0;
-            arabs = oldArabDebt < 0 ? oldArabDebt : 0;
-            imf = oldIMFDebt < 0 ? oldIMFDebt : 0;
+        {   // issue
+            china = oldChineseDebt < 0 ? -oldChineseDebt : 0;
+            arabs = oldArabDebt < 0 ? -oldArabDebt : 0;
+            imf = oldIMFDebt < 0 ? -oldIMFDebt : 0;
         }
         public void GetForeignDebtReceipts(out double china, out double arabs, out double imf)
         {
@@ -1478,7 +1499,7 @@ namespace EMG
 
         // IGovtMiscProfile:
 
-        readonly IPeople people = People.GetInstance();
+         IPeople people = People.GetInstance();
 
         public void GetMiscDetails(out double pop, out double popHappiness, out double unemployment, out double inflation)
         {
@@ -1759,7 +1780,7 @@ namespace EMG
     class Game : IGame, IGameGlobal, IPublisher, IGameOutcome
     {
         static Game instance = GetInstance();
-        public static Game GetInstance() { return instance == null ? instance = new Game() : instance; }
+        public static Game GetInstance() { return ((instance == null) ? (instance = new Game()) : (instance)); }
         private Game()
         {
             AddSubscriber(SportsContest.GetInstance());
@@ -1802,7 +1823,7 @@ namespace EMG
 
         string userKey;
 
-        readonly IDatabaseHandler dbhandle = DatabaseHandler.GetInstance();
+         IDatabaseHandler dbhandle = DatabaseHandler.GetInstance();
 
         public void Continue()
         {
@@ -1811,6 +1832,7 @@ namespace EMG
         public void NewGame()
         {
             turn = dbhandle.LoadData(false);
+            EndTurn();  //
         }
         public void Resign()
         {
