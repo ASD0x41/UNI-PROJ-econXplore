@@ -33,11 +33,11 @@ public class Page1_Variables : MonoBehaviour
         govt.GetForeignDebtReceipts(out double chinain, out double arabsin, out double imfin);
         govt.GetForeignInterestPayments(out double china, out double arabs, out double imf);
 
-        ExportsText.text = (exports / 1_000_000_000).ToString();
-        SalesText.text = govt.GetAssetSales().ToString();
-        LoansText.text = (chinain + arabsin + imfin).ToString();
-        ImportsText.text = (imports / 1_000_000_000).ToString();
-        InterestText.text = (china + arabs + imf).ToString();
-        DebtText.text = (chinaout + arabsout + imfout).ToString();
+        ExportsText.text = ((int)(exports / 1_000_000_000)).ToString();
+        SalesText.text = ((int)(govt.GetAssetSales()  / 1_000_000_000)).ToString();
+        LoansText.text = ((int)((chinain + arabsin + imfin) / 1_000_000_000)).ToString();
+        ImportsText.text = ((int)(imports / 1_000_000_000)).ToString();
+        InterestText.text = ((int)((china + arabs + imf) / 1_000_000_000)).ToString();
+        DebtText.text = ((int)((chinaout + arabsout + imfout) / 1_000_000_000)).ToString();
     }
 }

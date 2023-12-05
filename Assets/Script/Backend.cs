@@ -59,6 +59,9 @@ namespace EMG
         public static readonly double EVENT_IMP_CULTURAL_FESTIVAL = 1;   //
 
         public static readonly double RAID_ANGER = 1;    //
+
+        public static readonly double STARTING_TREASURY_BALANCE = 500_000_000_000.00;
+        public static readonly double STARTING_FOREX_RESERVES = 10_000_000_000.00;
     }
 
     interface IDataHandler
@@ -1123,8 +1126,8 @@ namespace EMG
 
         // IGovtCurrencyExchangeControls:
 
-         IAccount treasury = new Account();
-         IAccount forexReserve = new Account();
+         IAccount treasury = new Account(CONSTANTS.STARTING_TREASURY_BALANCE);
+         IAccount forexReserve = new Account(CONSTANTS.STARTING_FOREX_RESERVES);
          IForexMarket forexMarket = ForexMarket.GetInstance();
         double newForexTrade = 0;
 
