@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EMG;
 
 public class Page1_Variables : MonoBehaviour
 { 
     [SerializeField] private Text ExportsText;
     [SerializeField] private Text SalesText;
-    
+
     [SerializeField] private Text LoansText;
     
     [SerializeField] private Text ImportsText;
 
-    [SerializeField] private Text IntrestText;
+    [SerializeField] private Text InterestText;
 
     [SerializeField] private Text DebtText;
+
+    IGovtExternalProfile govt = Govt.GetInstance();
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +28,16 @@ public class Page1_Variables : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ExportsText.text = "9000";
-        SalesText.text = "5000";
-        LoansText.text = "7000";
-        ImportsText.text = "6000";
-        IntrestText.text = "3000";
-        DebtText.text = "1000";
+        govt.GetTradeDetails(out double imports, out double exports);
+        govt.GetForeignDebtPayments(out double chinaout, out double arabsout, out double imfout);
+        govt.GetForeignDebtReceipts(out double chinain, out double arabsin, out double imfin);
+        govt.GetForeignInterestPayments(out double china, out double arabs, out double imf);
+
+        ExportsText.text = (exports / 1_000_000_000).ToString();
+        SalesText.text = govt.GetAssetSales().ToString();
+        LoansText.text = (chinain + arabsin + imfin).ToString();
+        ImportsText.text = (imports / 1_000_000_000).ToString();
+        InterestText.text = (china + arabs + imf).ToString();
+        DebtText.text = (chinaout + arabsout + imfout).ToString();
     }
 }
