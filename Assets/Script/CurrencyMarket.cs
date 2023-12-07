@@ -27,14 +27,20 @@ public class CurrencyMarket : MonoBehaviour
     
     public void ConverttoDollar()
     {
+        if(CurrencyInput.text != "")
+        {
         float CurrencyInputValue = float.Parse(CurrencyInput.text);
         govt.TradeForex(CurrencyInputValue);
+        }
     }
 
     public void ConverttoPkr()
     {
+        if(CurrencyInput.text != "")
+        {
         float CurrencyInputValue = float.Parse(CurrencyInput.text);
         govt.TradeForex(-CurrencyInputValue);
+        }
     }
 
 }
