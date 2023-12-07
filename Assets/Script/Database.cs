@@ -15,10 +15,21 @@ namespace EMG
         private MyDb() { }
 
 
+        
+
 
         //private string dbName = "URI=file:Inventory.db";
         private string dbName = "URI=file:" + Application.dataPath + "/DB/Inventory.db";
         //string connectionString = "URI=file:" + Application.dataPath + "/YourDatabaseName.db";
+
+
+        
+
+
+
+
+
+
 
         // Start is called before the first frame update
         void Start()

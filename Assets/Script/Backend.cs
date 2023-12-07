@@ -1787,8 +1787,30 @@ namespace EMG
             List<long> listOfLong = new List<long>();
             List<bool> listOfBool = new List<bool>();
 
-            MyDb mydb = MyDb.GetInstance();
-            mydb.DisplayWeaopns(key, listOfDoubles, listOfInt, listOfLong);
+            if (flag)
+            {
+                MyDb mydb = MyDb.GetInstance();
+                mydb.DisplayWeaopns(userKey, ref listOfDoubles, ref listOfLong, ref listOfInt);
+            }
+            else
+            {
+                listOfDoubles.Add(CONSTANTS.STARTING_DEBT_LIMIT_CHINA);
+                listOfDoubles.Add(0);
+                listOfDoubles.Add(1);
+                listOfDoubles.Add(CONSTANTS.INTEREST_RATE_CHINA);
+                listOfDoubles.Add(0);
+
+                listOfDoubles.Add(0);
+                listOfDoubles.Add(CONSTANTS.STARTING_DEBT_LIMIT_IMF);
+                listOfDoubles.Add(1);
+                listOfDoubles.Add(CONSTANTS.INTEREST_RATE_IMF);
+                listOfDoubles.Add(0);
+
+
+
+
+            }
+            
 
 
 
