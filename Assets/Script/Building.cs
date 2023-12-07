@@ -8,6 +8,8 @@ public class Building : MonoBehaviour
 {
     IGovtMiscControls govt = Govt.GetInstance();
 
+    public Text buildingtxt;
+
     // Start is called before the first frame update
     public GameObject[] background;
     int index;
@@ -24,6 +26,7 @@ public class Building : MonoBehaviour
     void Update()
     {
         double buildings = govt.GetAssetDetails() / 5_000_000_000;
+        buildingtxt.text = ((int)buildings).ToString();
         if (buildings <= 25)
         {
             for (int i = 0; i < background.Length; i++)

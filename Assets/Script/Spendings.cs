@@ -38,14 +38,20 @@ public class Spendings : MonoBehaviour
 
     public void W_Spending()
     {
-        float W_SpendingInputValue = float.Parse(W_SpendingInput.text);
-        govt.AdjustWelfareSpending(W_SpendingInputValue * 1_000_000_000);
+        if (D_SpendingInput.text != "")
+        {
+            float D_SpendingInputValue = float.Parse(D_SpendingInput.text);
+            govt.AdjustDevelopmentFund(D_SpendingInputValue * 1_000_000_000);
+        }
     }
 
     public void D_Spending()
     {
-        float D_SpendingInputValue = float.Parse(D_SpendingInput.text);
-        govt.AdjustDevelopmentFund(D_SpendingInputValue * 1_000_000_000);
+        if (W_SpendingInput.text != "")
+        {
+            float W_SpendingInputValue = float.Parse(W_SpendingInput.text);
+            govt.AdjustWelfareSpending(W_SpendingInputValue * 1_000_000_000);
+        }
     }
 
 }

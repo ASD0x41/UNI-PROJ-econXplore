@@ -8,6 +8,8 @@ public class Satisfaction : MonoBehaviour
 {
     IGovtMiscProfile govt = Govt.GetInstance();
 
+    public Text satisfytxt;
+
     // Start is called before the first frame update
     public GameObject[] background;
     int index;
@@ -24,6 +26,7 @@ public class Satisfaction : MonoBehaviour
     void Update()
     {
         govt.GetMiscDetails(out double pop, out double popHappiness, out double unemployment, out double inflation);
+        satisfytxt.text = ((int)popHappiness).ToString();
         if (popHappiness <= 25)
         {
             for (int i = 0; i < background.Length; i++)

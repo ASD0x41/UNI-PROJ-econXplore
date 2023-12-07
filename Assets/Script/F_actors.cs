@@ -68,6 +68,7 @@ public class F_actors : MonoBehaviour
         {
             govtC.ManageChineseDebt(double.Parse(inputField.text) * 1_000_000_000);
             // take button shows up as pressed, repay button shows up as released
+            
         }
         else
         {

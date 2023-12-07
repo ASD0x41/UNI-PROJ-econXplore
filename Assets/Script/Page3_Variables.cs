@@ -54,21 +54,21 @@ public class Page3_Variables : MonoBehaviour
         govt.GetMiscFinancialDetails(out double diversion, out double raidProceeds);
         govt2.GetCurrencyExchangeDetails(out double treasuryBal, out double dollarRate, out double forexReservesBal);
 
-        Taxes.text = (taxes / 1_000_000_000).ToString();
-        ImportDuty.text = (duties / 1_000_000_000).ToString();
-        Privatization.text = (privatisationProceeds / 1_000_000_000).ToString();
-        Fines.text = (raidProceeds / 1_000_000_000).ToString();
-        LocalLoans.text = (debtTaken / 1_000_000_000).ToString();
-        Salaries.text = (salaries / 1_000_000_000).ToString();
-        Subsidies.text = (subsidies / 1_000_000_000).ToString();
-        Welfare.text = (welfare / 1_000_000_000).ToString();
-        Development.text = (devFund / 1_000_000_000).ToString();
-        Intrest.text = (interestPaid / 1_000_000_000).ToString();
-        Nationalization.text = (nationalisationFund / 1_000_000_000).ToString();
-        PublicEvents.text = (diversion / 1_000_000_000).ToString();
+        Taxes.text = ((int)(taxes / 1_000_000_000)).ToString();
+        ImportDuty.text = ((int)(duties / 1_000_000_000)).ToString();
+        Privatization.text = ((int)(privatisationProceeds / 1_000_000_000)).ToString();
+        Fines.text = ((int)(raidProceeds / 1_000_000_000)).ToString();
+        LocalLoans.text = ((int)(debtTaken / 1_000_000_000)).ToString();
+        Salaries.text = ((int)(salaries / 1_000_000_000)).ToString();
+        Subsidies.text = ((int)(subsidies / 1_000_000_000)).ToString();
+        Welfare.text = ((int)(welfare / 1_000_000_000)).ToString();
+        Development.text = ((int)(devFund / 1_000_000_000)).ToString();
+        Intrest.text = ((int)(interestPaid / 1_000_000_000)).ToString();
+        Nationalization.text = ((int)(nationalisationFund / 1_000_000_000)).ToString();
+        PublicEvents.text = ((int)(diversion / 1_000_000_000)).ToString();
 
 
-        NewTreasury.text = (treasuryBal / 1_000_000_000).ToString();
-        NetValue.text = ((taxes + duties + privatisationProceeds + debtTaken + raidProceeds - salaries - subsidies - welfare - devFund - interestPaid - nationalisationFund - diversion) / 1_000_000_000).ToString();
+        NewTreasury.text = ((int)(treasuryBal / 1_000_000_000)).ToString();
+        NetValue.text = ((int)((taxes + duties + privatisationProceeds + debtTaken + raidProceeds - salaries - subsidies - welfare - devFund - interestPaid - nationalisationFund - diversion) / 1_000_000_000)).ToString();
     }
 }

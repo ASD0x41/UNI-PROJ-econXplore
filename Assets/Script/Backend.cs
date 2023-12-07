@@ -212,8 +212,8 @@ namespace EMG
 
         public override void Update()
         {
-             IGovtForFinancialBody debtor = Govt.GetInstance();
-            debtor.GetCountryFinanceReport(out double assets, out double liabilities, out double forex);
+            IGovtForFinancialBody debtor = Govt.GetInstance();
+            debtor.GetCountryFinanceReport(out double assets, out double liabilities, out double forex, out double remit);
             debtLimit = (assets - liabilities) * CONSTANTS.DEBT_LIMIT_MOD_IMF + forex;
         }
 
@@ -245,7 +245,7 @@ namespace EMG
         public override void Update()
         {
              IGovtForFinancialBody debtor = Govt.GetInstance();
-            debtor.GetCountryFinanceReport(out double assets, out double liabilities, out double forex);
+            debtor.GetCountryFinanceReport(out double assets, out double liabilities, out double forex, out double remit);
             debtLimit = (assets - liabilities - debtOwed) * CONSTANTS.DEBT_LIMIT_MOD_ARABS;
         }
         public void GetData(List<double> doubles = null, List<int> ints = null, List<long> longs = null, List<bool> bools = null)
@@ -277,7 +277,7 @@ namespace EMG
         public override void Update()
         {
              IGovtForFinancialBody debtor = Govt.GetInstance();
-            debtor.GetCountryFinanceReport(out double assets, out double liabilities, out double forex);
+            debtor.GetCountryFinanceReport(out double assets, out double liabilities, out double forex, out double remit);
             debtLimit = (assets - debtOwed) * CONSTANTS.DEBT_LIMIT_MOD_LOCAL_BANK;
         }
         public void GetData(List<double> doubles = null, List<int> ints = null, List<long> longs = null, List<bool> bools = null)

@@ -8,6 +8,8 @@ public class Health : MonoBehaviour
 {
     IGovtMiscControls govt = Govt.GetInstance();
 
+    public Text healthtxt;
+
     // Start is called before the first frame update
     public GameObject[] background;
     int index;
@@ -24,6 +26,8 @@ public class Health : MonoBehaviour
     void Update()
     {
         double health = govt.GetAssetDetails() / 5_000_000_000;
+        healthtxt.text = ((int)health).ToString();
+
         if (health <= 10)
         {
             for (int i = 0; i < background.Length; i++)
