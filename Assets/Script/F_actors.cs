@@ -64,7 +64,7 @@ public class F_actors : MonoBehaviour
     public void TakeFromChina()
     {
         govtC.GetChineseDebtDetails(out double debtOwed, out double interestRate, out double debtLimit, out bool allowed);
-        if ((double.Parse(inputField.text)) <= debtLimit / 1_000_000_000)
+        if ((double.Parse(inputField.text)) <= debtLimit / 1_000_000_000 || inputField.text != "")
         {
             govtC.ManageChineseDebt(double.Parse(inputField.text) * 1_000_000_000);
             // take button shows up as pressed, repay button shows up as released
@@ -79,7 +79,7 @@ public class F_actors : MonoBehaviour
     public void PayToChina()
     {
         govtC.GetChineseDebtDetails(out double debtOwed, out double interestRate, out double debtLimit, out bool allowed);
-        if ((double.Parse(inputField.text)) <= debtOwed / 1_000_000_000)
+        if ((double.Parse(inputField.text)) <= debtOwed / 1_000_000_000 || inputField.text != "") 
         {
             govtC.ManageChineseDebt(-double.Parse(inputField.text) * 1_000_000_000);
             // repay button shows up as pressed, take button shows up as released
@@ -93,9 +93,9 @@ public class F_actors : MonoBehaviour
     public void TakeFromIMF()
     {
         govtI.GetIMFDebtDetails(out double debtOwed, out double interestRate, out double debtLimit, out bool allowed);
-        if ((double.Parse(inputField.text)) <= debtLimit / 1_000_000_000)
+        if ((double.Parse(inputField.text)) <= debtLimit / 1_000_000_000 || inputField.text != "")
         {
-            govtI.ManageIMFDebt(double.Parse(inputField.text) * 1_000_000_000);
+            govtI.ManageIMFDebt(double.Parse(inputField.text) * 1_000_000_000 );
             // take button shows up as pressed, repay button shows up as released
         }
         else
@@ -107,7 +107,7 @@ public class F_actors : MonoBehaviour
     public void PayToIMF()
     {
         govtI.GetIMFDebtDetails(out double debtOwed, out double interestRate, out double debtLimit, out bool allowed);
-        if ((double.Parse(inputField.text)) <= debtOwed / 1_000_000_000)
+        if ((double.Parse(inputField.text)) <= debtOwed / 1_000_000_000 || inputField.text != "")
         {
             govtI.ManageIMFDebt(-double.Parse(inputField.text) * 1_000_000_000);
             // repay button shows up as pressed, take button shows up as released
@@ -121,7 +121,7 @@ public class F_actors : MonoBehaviour
     public void TakeFromArabs()
     {
         govtA.GetArabDebtDetails(out double debtOwed, out double interestRate, out double debtLimit, out bool allowed);
-        if ((double.Parse(inputField.text)) <= debtLimit / 1_000_000_000)
+        if ((double.Parse(inputField.text)) <= debtLimit / 1_000_000_000 || inputField.text != "")
         {
             govtA.ManageArabDebt(double.Parse(inputField.text) * 1_000_000_000);
             // take button shows up as pressed, repay button shows up as released
@@ -135,7 +135,7 @@ public class F_actors : MonoBehaviour
     public void PayToArabs()
     {
         govtA.GetArabDebtDetails(out double debtOwed, out double interestRate, out double debtLimit, out bool allowed);
-        if ((double.Parse(inputField.text)) <= debtOwed / 1_000_000_000)
+        if ((double.Parse(inputField.text)) <= debtOwed / 1_000_000_000 || inputField.text != "")
         {
             govtA.ManageArabDebt(-double.Parse(inputField.text) * 1_000_000_000);
             // repay button shows up as pressed, take button shows up as released
@@ -149,7 +149,7 @@ public class F_actors : MonoBehaviour
     public void TakeFromLocal()
     {
         govtL.GetLocalDebtDetails(out double debtOwed, out double interestRate, out double debtLimit, out bool allowed);
-        if ((double.Parse(inputField.text)) <= debtLimit / 1_000_000_000)
+        if ((double.Parse(inputField.text)) <= debtLimit / 1_000_000_000 || inputField.text != "")
         {
             govtL.ManageLocalDebt(double.Parse(inputField.text) * 1_000_000_000);
             // take button shows up as pressed, repay button shows up as released
@@ -163,7 +163,7 @@ public class F_actors : MonoBehaviour
     public void PayToLocal()
     {
         govtL.GetLocalDebtDetails(out double debtOwed, out double interestRate, out double debtLimit, out bool allowed);
-        if ((double.Parse(inputField.text)) <= debtOwed / 1_000_000_000)
+        if ((double.Parse(inputField.text)) <= debtOwed / 1_000_000_000 || inputField.text != "")
         {
             govtL.ManageLocalDebt(-double.Parse(inputField.text) * 1_000_000_000);
             // repay button shows up as pressed, take button shows up as released
@@ -173,4 +173,46 @@ public class F_actors : MonoBehaviour
             // invalid value entered popup
         }
     }
+
+    public void repaybtnSelected()
+    {
+      
+       Color targetColor = new Color(1, 255, 0); // Replace with the color you want
+
+       if (repay.GetComponent<Button>().colors.normalColor == targetColor)
+    {
+        repay.GetComponent<Button>().interactable = true;
+        var colors = take.GetComponent<Button>().colors;
+        colors.normalColor = Color.white; // Replace with the color you want
+        take.GetComponent<Button>().colors = colors;
+    }
+    else
+    {
+        repay.GetComponent<Button>().interactable = false;
+        var colors = take.GetComponent<Button>().colors;
+        colors.normalColor = targetColor;
+        take.GetComponent<Button>().colors = colors;
+    }
+    }
+
+  public void takebtnSelected()
+{
+    Color targetColor = new Color(1, 255, 0); // Replace with the color you want
+
+    if (take.GetComponent<Button>().colors.normalColor == targetColor)
+    {
+        repay.GetComponent<Button>().interactable = true;
+        var colors = take.GetComponent<Button>().colors;
+        colors.normalColor = Color.white; // Replace with the color you want
+        take.GetComponent<Button>().colors = colors;
+    }
+    else
+    {
+        repay.GetComponent<Button>().interactable = false;
+        var colors = take.GetComponent<Button>().colors;
+        colors.normalColor = targetColor;
+        take.GetComponent<Button>().colors = colors;
+    }
+}
+
 }

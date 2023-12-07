@@ -25,7 +25,7 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        double buildings = govt.GetAssetDetails() / 5_000_000_000;
+        double buildings = govt.GetAssetDetails() / 1_000_000_000;
         buildingtxt.text = ((int)buildings).ToString();
         if (buildings <= 25)
         {
