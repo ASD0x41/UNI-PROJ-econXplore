@@ -78,7 +78,7 @@ namespace EMG
         public static readonly int STARTING_POP_HAPPINESS = 50;
         public static readonly double STARTING_EMP_PERCENT = 50.00;
         public static readonly double STARTING_PUBLIC_RATIO = 50.00;
-        public static readonly double STARTING_AVG_INCOME = 20_000;
+        public static readonly double STARTING_AVG_INCOME = 100_000;
         public static readonly double STARTING_INFLATION = 50.00;
 
         public static readonly double STARTING_DOLLAR_RATE = 275.00;
@@ -119,7 +119,13 @@ namespace EMG
         protected double interestPaid = 0;
 
         public double GetDebtOwed() { return debtOwed; }
-        public double GetDebtLimit() { return debtLimit; }
+        public double GetDebtLimit()
+        {
+            if (debtLimit > 0)
+                return debtLimit;
+            else
+                return 0;
+        }
         public double GetDebtRepaid() { return debtRepaid; }
         public double GetInterestRate() { return interestRate; }
         public double GetInterestPaid() { return interestPaid; }
@@ -778,13 +784,19 @@ namespace EMG
         {
             doubles.Add(cashVolume);
             ints.Add(actionTurn);
-            bools.Add(planConduction);
+            if (planConduction == true)
+                ints.Add(1);
+            else
+                ints.Add(0);
         }
         public void SetData(ref int counter1, ref int counter2, ref int counter3, ref int counter4, List<double> doubles = null, List<int> ints = null, List<long> longs = null, List<bool> bools = null)
         {
             cashVolume = doubles[counter1++];
             actionTurn = ints[counter2++];
-            planConduction = bools[counter4++];
+            if (ints[counter2++] == 1)
+                planConduction = true;
+            else
+                planConduction = false;
         }
     }
 
@@ -859,13 +871,21 @@ namespace EMG
         public void GetData(List<double> doubles = null, List<int> ints = null, List<long> longs = null, List<bool> bools = null)
         {
             ints.Add(actionTurn);
-            bools.Add(planConduction);
+            if (planConduction == true)
+                ints.Add(1);
+            else
+                ints.Add(0);
+            //bools.Add(planConduction);
 
         }
         public void SetData(ref int counter1, ref int counter2, ref int counter3, ref int counter4, List<double> doubles = null, List<int> ints = null, List<long> longs = null, List<bool> bools = null)
         {
             actionTurn = ints[counter2++];
-            planConduction = bools[counter4++];
+            if (ints[counter2++] == 1)
+                planConduction = true;
+            else
+                planConduction = false;
+            //planConduction = bool[counter4++];
         }
 
 
@@ -889,12 +909,18 @@ namespace EMG
         public void GetData(List<double> doubles = null, List<int> ints = null, List<long> longs = null, List<bool> bools = null)
         {
             ints.Add(actionTurn);
-            bools.Add(planConduction);
+            if (planConduction == true)
+                ints.Add(1);
+            else
+                ints.Add(0);
         }
         public void SetData(ref int counter1, ref int counter2, ref int counter3, ref int counter4, List<double> doubles = null, List<int> ints = null, List<long> longs = null, List<bool> bools = null)
         {
             actionTurn = ints[counter2++];
-            planConduction = bools[counter4++];
+            if (ints[counter2++] == 1)
+                planConduction = true;
+            else
+                planConduction = false;
         }
 
     }
@@ -916,12 +942,18 @@ namespace EMG
         public void GetData(List<double> doubles = null, List<int> ints = null, List<long> longs = null, List<bool> bools = null)
         {
             ints.Add(actionTurn);
-            bools.Add(planConduction);
+            if (planConduction == true)
+                ints.Add(1);
+            else
+                ints.Add(0);
         }
         public void SetData(ref int counter1, ref int counter2, ref int counter3, ref int counter4, List<double> doubles = null, List<int> ints = null, List<long> longs = null, List<bool> bools = null)
         {
             actionTurn = ints[counter2++];
-            planConduction = bools[counter4++];
+            if (ints[counter2++] == 1)
+                planConduction = true;
+            else
+                planConduction = false;
         }
     }
 
@@ -1184,7 +1216,7 @@ namespace EMG
         public void AdjustAvgSalary(double newVal)
         {
             if (newVal > 0)
-                avgSalary = newVal;
+                avgSalary = (newVal / 100) * CONSTANTS.STARTING_AVG_INCOME * 2;
         }
         public void AdjustImpDutyRate(double newVal)
         {
@@ -1604,7 +1636,7 @@ namespace EMG
             doubles.Add(oldDevelopmentFund);
             doubles.Add(oldwelfareSpending);
             doubles.Add(oldForexTrade);
-            doubles.Add(oldForexTrade);
+            doubles.Add(oldForexReturn);
             doubles.Add(oldChineseDebt);
             doubles.Add(oldIMFDebt);
             doubles.Add(oldArabDebt);
@@ -1664,8 +1696,8 @@ namespace EMG
 
     interface IDatabaseHandler
     {
-        void SaveData(int turn);
-        int LoadData(bool flag);
+        void SaveData(string userKey, int turn);
+        int LoadData(string userKey, bool flag);
     }
 
     class DatabaseHandler : IDatabaseHandler
@@ -1677,7 +1709,7 @@ namespace EMG
 
         }
 
-        public void SaveData(int turn)
+        public void SaveData(string key, int turn)
         {
 
             IDataHandler china = China.GetInstance();
@@ -1717,17 +1749,18 @@ namespace EMG
             govt.GetData(doubles: listOfDoubles);
 
 
+            MyDb mydb = MyDb.GetInstance();
+            mydb.saveToDb(key, listOfDoubles, listOfInt, listOfLong);
 
 
-
-
+            
 
 
             // cloud save
 
         }
 
-        public int LoadData(bool flag)
+        public int LoadData(string userKey, bool flag)
         {
             // if flag, from db, otherwise defaults
 
@@ -1753,6 +1786,11 @@ namespace EMG
             List<int> listOfInt = new List<int>();
             List<long> listOfLong = new List<long>();
             List<bool> listOfBool = new List<bool>();
+
+            MyDb mydb = MyDb.GetInstance();
+            mydb.DisplayWeaopns(key, listOfDoubles, listOfInt, listOfLong);
+
+
 
             int counter1 = 0;
             int counter2 = 0;
@@ -1864,17 +1902,17 @@ namespace EMG
 
         public void Continue()
         {
-            turn = dbhandle.LoadData(true);
+            turn = dbhandle.LoadData(userKey, true);
         }
         public void NewGame()
         {
-            turn = dbhandle.LoadData(false);
+            turn = dbhandle.LoadData(userKey, false);
             EndTurn();  //
         }
         
         public void Exit()
         {
-            dbhandle.SaveData(turn);
+            dbhandle.SaveData(userKey, turn);
         }
         public void EndTurn()
         {
