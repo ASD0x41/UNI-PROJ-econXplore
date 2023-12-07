@@ -14,6 +14,8 @@ public class Forex_Calculations : MonoBehaviour
     public Text inFlow;
     public Text outFlow;
 
+    public Text Remittance;
+
     IGovtForFinancialBody govt = Govt.GetInstance();
 
     // Start is called before the first frame update

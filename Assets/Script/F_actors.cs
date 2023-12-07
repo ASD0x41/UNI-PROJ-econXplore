@@ -12,6 +12,8 @@ public class F_actors : MonoBehaviour
     public Text owed;
     public Text limit;
     public Text interest;
+    public Button repay;
+    public Button take;
     public string input;
 
     IGovtChineseDebtControls govtC = Govt.GetInstance();
