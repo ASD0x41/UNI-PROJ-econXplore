@@ -11,12 +11,13 @@ public class WinGame : MonoBehaviour
     
     public string sceneName;
     
-    [SerializeField] private InCorrectPopup incorrectPopup;
+    [SerializeField] private InCorrectPopup savePopup;
    
-     public void Winner()
+     public void SaveExit()
     {
-        incorrectPopup.gameObject.SetActive(true);
-        incorrectPopup.Ok_button.onClick.AddListener(YesClicked);
+        // SAVE & EXIT
+        savePopup.gameObject.SetActive(true);
+        savePopup.Ok_button.onClick.AddListener(YesClicked);
     }
     private void YesClicked()
     {
