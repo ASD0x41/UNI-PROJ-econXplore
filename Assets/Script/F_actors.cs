@@ -200,33 +200,38 @@ public class F_actors : MonoBehaviour
 
     public void repaybtnSelected()
     {
-      
-       Color targetColor = new Color(1, 255, 0); 
 
-       if (repay.GetComponent<Button>().colors.normalColor == targetColor)
-    {
-        take.GetComponent<Button>().interactable = true;
-        var colors = repay.GetComponent<Button>().colors;
-        colors.normalColor = Color.white; 
-        repay.GetComponent<Button>().colors = colors;
-    }
-    else
-    {
-        take.GetComponent<Button>().interactable = false;
-        var colors = repay.GetComponent<Button>().colors;
-        colors.normalColor = targetColor;
-        repay.GetComponent<Button>().colors = colors;
-    }
+       Color targetColor = new Color(0, 128, 0); 
+
+       if (repay.GetComponent<Button>().colors.selectedColor == targetColor)
+        {
+            take.GetComponent<Button>().interactable = true;
+            var colors = repay.GetComponent<Button>().colors;
+            colors.selectedColor = Color.white; 
+            colors.normalColor = Color.white; 
+            repay.GetComponent<Button>().colors = colors;
+        }
+        else
+        {
+            take.GetComponent<Button>().interactable = false;
+            var colors = repay.GetComponent<Button>().colors;
+            colors.selectedColor = targetColor;
+            colors.normalColor = targetColor;
+            repay.GetComponent<Button>().colors = colors;
+        }
     }
 
    public void takebtnSelected()
     {
-        Color targetColor = new Color(1, 255, 0); 
+        Color targetColor = new Color(255, 0, 0); 
 
-        if (take.GetComponent<Button>().colors.normalColor == targetColor)
+        
+
+        if (take.GetComponent<Button>().colors.selectedColor == targetColor)
         {
             repay.GetComponent<Button>().interactable = true;
             var colors = take.GetComponent<Button>().colors;
+            colors.selectedColor = Color.white; 
             colors.normalColor = Color.white; 
             take.GetComponent<Button>().colors = colors;
         }
@@ -234,6 +239,7 @@ public class F_actors : MonoBehaviour
         {
             repay.GetComponent<Button>().interactable = false;
             var colors = take.GetComponent<Button>().colors;
+            colors.selectedColor = targetColor;
             colors.normalColor = targetColor;
             take.GetComponent<Button>().colors = colors;
         }
