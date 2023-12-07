@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 
 namespace EMG
 {
-    public class MyDb// : MonoBehaviour
+    public class MyDb : MonoBehaviour
     {
         static MyDb instance = GetInstance();
         public static MyDb GetInstance() { return ((instance == null) ? (instance = new MyDb()) : (instance)); }
@@ -20,10 +20,11 @@ namespace EMG
 
         //private string dbName = "URI=file:Inventory.db";
         private string dbName = "URI=file:" + Application.dataPath + "/DB/Inventory.db";
+        //private string dbName = "URI=file:" + Application.streamingAssetsPath + "/DB/Inventory.db";
         //string connectionString = "URI=file:" + Application.dataPath + "/YourDatabaseName.db";
 
 
-        
+
 
 
 
@@ -190,7 +191,7 @@ namespace EMG
                 {
                     
 
-                    command.CommandText = "SELECT 1 FROM China WHERE pin = @PinToCheck";
+                    command.CommandText = "SELECT 1 FROM Users WHERE userKey = @PinToCheck";
                     command.Parameters.AddWithValue("@PinToCheck", pin);
 
                     // ExecuteReader returns a DataReader object
@@ -344,6 +345,11 @@ namespace EMG
 
                     command.ExecuteNonQuery();
 
+                    command.CommandText = "UPDATE Users SET turn = @TurnValue";
+                    command.Parameters.AddWithValue("@TurnValue", ints[7]);
+
+                    command.ExecuteNonQuery();
+
 
 
                     //command.ExecuteNonQuery();
@@ -352,7 +358,7 @@ namespace EMG
             }
 
         }
-        public void DisplayWeaopns(string pin, ref List<double> doubles, ref List<long> longs2, ref List<int> ints2)
+        public int DisplayWeaopns(string pin, ref List<double> doubles, ref List<long> longs2, ref List<int> ints2)
         {
             //double debtLimit = 0.0;
 
@@ -370,6 +376,9 @@ namespace EMG
                         if (reader.Read())
                         {
                             doubles.Add(Convert.ToDouble(reader["DebtLimit"]));
+
+                            //
+
                             doubles.Add(Convert.ToDouble(reader["DebtTurn"]));
                             doubles.Add(Convert.ToDouble(reader["DebtRepaid"]));
                             doubles.Add(Convert.ToDouble(reader["InterestRate"]));
@@ -781,7 +790,41 @@ namespace EMG
 
                         reader.Close();
                     }
-                    
+                    command.CommandText = "SELECT * FROM Users WHERE turn = @turn";
+                    command.Parameters.AddWithValue("@turn", ints2[7]);
+
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            ints2.Add(Convert.ToInt16(reader["turn"]));
+                            return ints2[68];
+
+                            //
+
+                            //doubles.Add(Convert.ToDouble(reader["DebtTurn"]));
+                            //doubles.Add(Convert.ToDouble(reader["DebtRepaid"]));
+                            //doubles.Add(Convert.ToDouble(reader["InterestRate"]));
+
+                            //doubles.Add(Convert.ToDouble(reader["InterestPaid"]));
+                            //doubles.Add(Convert.ToDouble(reader["DebtPaid"]));
+
+                            //Debug.Log("Debt Limit: " + doubles[0]);
+                            //Debug.Log("Debt Turn: " + doubles[1]);
+                            //Debug.Log("Debt Repaid: " + doubles[2]);
+                            //Debug.Log("Interest Rate: " + doubles[3]);
+                            //Debug.Log("Debt Paid: " + doubles[4]);
+
+
+                        }
+                        command.CommandText = "Update Users set turn = 0 where userKey = @pin";
+                        command.Parameters.AddWithValue("@pin", pin);
+
+                        command.ExecuteNonQuery();
+
+                        reader.Close();
+                    }
+
 
                 }
 
@@ -870,8 +913,9 @@ namespace EMG
                 connection.Close();
             }
 
-
+            return -1;
         }
+        
     }
 
 }
