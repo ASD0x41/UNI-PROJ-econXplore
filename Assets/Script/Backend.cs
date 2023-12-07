@@ -1928,6 +1928,7 @@ namespace EMG
         void Exit();
         int GetTurn();
         void EndTurn();
+        void SetKey(string key);
 
 
         bool CheckVictory();
@@ -2006,7 +2007,9 @@ namespace EMG
 
         string userKey;
 
-         IDatabaseHandler dbhandle = DatabaseHandler.GetInstance();
+        public void SetKey(string key) => userKey = key;
+
+        IDatabaseHandler dbhandle = DatabaseHandler.GetInstance();
 
         public void Continue()
         {

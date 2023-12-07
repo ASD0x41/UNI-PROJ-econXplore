@@ -9978,6 +9978,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 685911643}
   m_CullTransparentMesh: 1
+--- !u!1 &690165763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 690165765}
+  - component: {fileID: 690165764}
+  m_Layer: 0
+  m_Name: resetbuttons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &690165764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690165763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac7a9e2935495749869292f0a7b2b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Take1: {fileID: 697733064}
+  Take2: {fileID: 140799182}
+  Take3: {fileID: 1495767115}
+  Take4: {fileID: 1449996093}
+  Repay1: {fileID: 823468427}
+  Repay2: {fileID: 1295210244}
+  Repay3: {fileID: 29531433}
+  Repay4: {fileID: 1540488513}
+  Dollars: {fileID: 741256163}
+  IMFinput: {fileID: 1996239854}
+  Chinainput: {fileID: 56738886}
+  Arabinput: {fileID: 1160077874}
+  Localinput: {fileID: 1363337374}
+  W_develope: {fileID: 1192086677}
+  D_develope: {fileID: 555896953}
+  C_Amount: {fileID: 458425877}
+  Pkr: {fileID: 775911539}
+--- !u!4 &690165765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690165763}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 539.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &692460719
 GameObject:
   m_ObjectHideFlags: 0
@@ -28048,6 +28109,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 690165764}
+        m_TargetAssemblyTypeName: resetButtons, Assembly-CSharp
+        m_MethodName: resetbtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1846692351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32575,3 +32648,4 @@ SceneRoots:
   - {fileID: 905754383}
   - {fileID: 1854092358}
   - {fileID: 107235276}
+  - {fileID: 690165765}
