@@ -320,9 +320,9 @@ namespace EMG
 
                     command.ExecuteNonQuery();
 
-                    command.CommandText = "Insert into Account (pin, Balance) values ('" + pin + "', '" + doubles[29] + "');";
+                    //command.CommandText = "Insert into Account (pin, Balance) values ('" + pin + "', '" + doubles[29] + "');";
 
-                    command.ExecuteNonQuery();
+                    //command.ExecuteNonQuery();
 
                     command.CommandText = "Insert into ForexMarket (pin, DollarRate, DollarSupply, DollarDemand) values ('" + pin + "', '" + doubles[30] + "', '" + doubles[31] + "', '" + doubles[32] + "');";
 

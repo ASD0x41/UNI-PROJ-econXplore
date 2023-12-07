@@ -519,7 +519,7 @@ namespace EMG
             IGovtForPeople govt = Govt.GetInstance();
             IGameOutcome game = Game.GetInstance();
             govt.GetPublicIndicators(out double salary, out double dollarRate, out double taxRate, out double welfare, out double natLevel);
-            popHappiness += (int)(salary + welfare - taxRate - dollarRate + natLevel); //
+            popHappiness += (int)(salary / 1_000 + welfare / 1_000_000_000 - taxRate - dollarRate + natLevel); //
             if (popHappiness <= 0)
                 game.InformRevolt();
         }

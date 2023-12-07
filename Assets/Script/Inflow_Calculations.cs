@@ -31,10 +31,12 @@ public class Inflow_Calculations : MonoBehaviour
     {
         IGovtExternalProfile govt = Govt.GetInstance();
         govt.GetTradeDetails(out double imports, out double myexports, out double remit);
+        govt.GetForeignDebtReceipts(out double china, out double arabs, out double imf);
+
         float.TryParse(exports.text, out float exports_Value);
         float.TryParse(loans.text, out float loans_Value);
         float.TryParse(Assests.text, out float Assests_Value);
       
-        total.text = (exports_Value + loans_Value + Assests_Value + (remit / 1_000_000_000)).ToString();
+        total.text = (exports_Value + (china + arabs + imf) / 1_000_000_000 + Assests_Value + (remit / 1_000_000_000)).ToString();
     }
 }
