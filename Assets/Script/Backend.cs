@@ -25,6 +25,12 @@ namespace EMG
         public static readonly double STARTING_DEBT_ARABS = 20_000_000_000;
         public static readonly double STARTING_DEBT_LOCAL_BANK = 20_000_000_000;
 
+        public static readonly double STARTING_TAX_RATE = 15.00;
+        public static readonly double STARTING_DUTY_RATE = 5.00;
+        public static readonly double STARTING_SUBSIDY_RATE = 5.00;
+        public static readonly double STARTING_NAT_LEVEL = 50.00;
+        public static readonly double STARTING_AVG_SALARY = 100_000.00;
+
         public static readonly double STARTING_DEBT_LIMIT_CHINA = 40_000_000_000;   //
         public static readonly double STARTING_DEBT_LIMIT_IMF = 20_000_000_000; //
         public static readonly double STARTING_DEBT_LIMIT_ARABS = 20_000_000_000;   //
@@ -1164,11 +1170,11 @@ namespace EMG
 
         // IGovtBudgetControls:
 
-        double taxRate;
-        double avgSalary;
-        double impDutyRate;
-        double expSubsidyRate;
-        double nationalisationLevel;
+        double taxRate = CONSTANTS.STARTING_TAX_RATE;
+        double avgSalary = CONSTANTS.STARTING_AVG_SALARY;
+        double impDutyRate = CONSTANTS.STARTING_DUTY_RATE;
+        double expSubsidyRate = CONSTANTS.STARTING_SUBSIDY_RATE;
+        double nationalisationLevel = CONSTANTS.STARTING_NAT_LEVEL;
 
         public void AdjustTaxRate(double newVal)
         {
@@ -1196,8 +1202,8 @@ namespace EMG
                 nationalisationLevel = newVal;
         }
 
-        double newDevelopmentFund;
-        double newWelfareSpending;
+        double newDevelopmentFund = 0;
+        double newWelfareSpending = 0;
 
         public void AdjustDevelopmentFund(double newVal)
         {
@@ -1251,11 +1257,11 @@ namespace EMG
             PayLocalInterest();
         }
 
-        double taxesCollected;
-        double dutiesCollected;
-        double salariesPaid;
-        double subsidiesPaid;
-        double nationalProceeds;
+        double taxesCollected = 0;
+        double dutiesCollected = 0;
+        double salariesPaid = 0;
+        double subsidiesPaid = 0;
+        double nationalProceeds = 0;
 
         void CollectTaxes()
         {
@@ -1290,9 +1296,9 @@ namespace EMG
             nationalProceeds = proceeds;
         }
 
-        double infrastructureThreshold;
-        double oldDevelopmentFund;
-        double oldwelfareSpending;
+        double infrastructureThreshold = 0;
+        double oldDevelopmentFund = 0;
+        double oldwelfareSpending = 0;
 
         void DevelopInfrastructure()
         {
@@ -1312,14 +1318,14 @@ namespace EMG
             newWelfareSpending = 0;
         }
 
-        double oldForexTrade;
-        double oldForexReturn;
+        double oldForexTrade = 0;
+        double oldForexReturn = 0;
 
-        double oldChineseDebt;
-        double oldIMFDebt;
-        double oldArabDebt;
-        double oldLocalDebt;
-        double remittances;
+        double oldChineseDebt = 0;
+        double oldIMFDebt = 0;
+        double oldArabDebt = 0;
+        double oldLocalDebt = 0;
+        double remittances = 0;
 
         void TradeForex()   // +ive: dollars bought; -ive: dollars sold
         {
@@ -1414,10 +1420,10 @@ namespace EMG
             }
         }
 
-        double chineseInterest;
-        double IMFinterest;
-        double arabInterest;
-        double localInterest;
+        double chineseInterest = 0;
+        double IMFinterest = 0;
+        double arabInterest = 0;
+        double localInterest = 0;
 
         void PayForeignInterest()
         {
@@ -1442,8 +1448,8 @@ namespace EMG
 
         // IGovtInternalProfile:
 
-        double raidSiezure;
-        double diversionCost;
+        double raidSiezure = 0;
+        double diversionCost = 0;
 
         public void GetForexTradeDetailsRupees(out double bought, out double sold)
         {
@@ -1453,7 +1459,7 @@ namespace EMG
         public void GetNationalisationDetails(out double privatisationProceeds, out double nationalisationFund)
         {
             privatisationProceeds = nationalProceeds > 0 ? nationalProceeds : 0;
-            nationalisationFund = nationalProceeds < 0 ? nationalProceeds : 0;
+            nationalisationFund = nationalProceeds < 0 ? -nationalProceeds : 0;
         }
         public void GetGovtRevenueDetails(out double taxes, out double duties)
         {
@@ -1482,7 +1488,7 @@ namespace EMG
         // IGovtExternalProfile:
 
         ITraders traders = Traders.GetInstance();
-        double assetSales;
+        double assetSales = 0;
 
         public void GetForexTradeDetailsDollars(out double bought, out double sold)
         {
