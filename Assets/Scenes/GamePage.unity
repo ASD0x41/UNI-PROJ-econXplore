@@ -1138,6 +1138,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 592103935}
+        m_TargetAssemblyTypeName: Assistant, Assembly-CSharp
+        m_MethodName: infocricketMatch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &45373506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3682,6 +3694,18 @@ MonoBehaviour:
       - m_Target: {fileID: 469027485}
         m_TargetAssemblyTypeName: diversionpublic, Assembly-CSharp
         m_MethodName: SellAssets
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 592103935}
+        m_TargetAssemblyTypeName: Assistant, Assembly-CSharp
+        m_MethodName: infoSellAssests
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9142,6 +9166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AssistantText: {fileID: 1912188313}
   turnCounterText: {fileID: 72774870}
+  health: {fileID: 826168053}
 --- !u!1 &600409943
 GameObject:
   m_ObjectHideFlags: 0
@@ -10341,6 +10366,18 @@ MonoBehaviour:
       - m_Target: {fileID: 469027485}
         m_TargetAssemblyTypeName: diversionpublic, Assembly-CSharp
         m_MethodName: conductRaid
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 592103935}
+        m_TargetAssemblyTypeName: Assistant, Assembly-CSharp
+        m_MethodName: InformRaid
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16739,6 +16776,18 @@ MonoBehaviour:
       - m_Target: {fileID: 469027485}
         m_TargetAssemblyTypeName: diversionpublic, Assembly-CSharp
         m_MethodName: orderHoliday
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 592103935}
+        m_TargetAssemblyTypeName: Assistant, Assembly-CSharp
+        m_MethodName: infoholiday
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27978,6 +28027,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1854092357}
         m_TargetAssemblyTypeName: EndTurn, Assembly-CSharp
         m_MethodName: EndTurnButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 592103935}
+        m_TargetAssemblyTypeName: Assistant, Assembly-CSharp
+        m_MethodName: resetcomment
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
