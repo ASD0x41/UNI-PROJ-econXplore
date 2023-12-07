@@ -15,14 +15,18 @@ public class LevelManager : MonoBehaviour
     private string input;
 
    [SerializeField] private InCorrectPopup incorrectPopup;
-   
-   IGame game = Game.GetInstance();
 
+
+    
+    IGame game = Game.GetInstance();
     public void Unlock()
     {
-        
+        MyDb mydb = MyDb.GetInstance();
         input = inputField.text;
-        if (input == "1234" || input == "4321" || input == "0000" || input == "1122")
+        Debug.Log("hello, here I am.");
+        //if (input == "1234")
+        //if (input == "1234" || input == "4321" || input == "0000" || input == "1122")
+        if (mydb.CheckPin(input) == 1)
         {
             game.SetKey(input);
             changeScene();
