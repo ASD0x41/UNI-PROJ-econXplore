@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EMG;
 
 public class Inflow_Calculations : MonoBehaviour
 {    
@@ -28,10 +29,12 @@ public class Inflow_Calculations : MonoBehaviour
 
     void Calculations()
     {
+        IGovtExternalProfile govt = Govt.GetInstance();
+        govt.GetTradeDetails(out double imports, out double myexports, out double remit);
         float.TryParse(exports.text, out float exports_Value);
         float.TryParse(loans.text, out float loans_Value);
         float.TryParse(Assests.text, out float Assests_Value);
       
-        total.text = (exports_Value + loans_Value + Assests_Value).ToString();
+        total.text = (exports_Value + loans_Value + Assests_Value + (remit / 1_000_000_000)).ToString();
     }
 }

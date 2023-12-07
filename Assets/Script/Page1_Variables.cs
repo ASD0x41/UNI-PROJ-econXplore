@@ -28,7 +28,7 @@ public class Page1_Variables : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        govt.GetTradeDetails(out double imports, out double exports);
+        govt.GetTradeDetails(out double imports, out double exports, out double remit);
         govt.GetForeignDebtPayments(out double chinaout, out double arabsout, out double imfout);
         govt.GetForeignDebtReceipts(out double chinain, out double arabsin, out double imfin);
         govt.GetForeignInterestPayments(out double china, out double arabs, out double imf);

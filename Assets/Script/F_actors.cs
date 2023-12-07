@@ -12,6 +12,8 @@ public class F_actors : MonoBehaviour
     public Text owed;
     public Text limit;
     public Text interest;
+    public Button repay;
+    public Button take;
     public string input;
 
     IGovtChineseDebtControls govtC = Govt.GetInstance();
@@ -66,6 +68,7 @@ public class F_actors : MonoBehaviour
         {
             govtC.ManageChineseDebt(double.Parse(inputField.text) * 1_000_000_000);
             // take button shows up as pressed, repay button shows up as released
+            
         }
         else
         {
