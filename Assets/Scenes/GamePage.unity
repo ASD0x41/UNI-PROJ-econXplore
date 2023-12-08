@@ -2421,7 +2421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4523711dfe6b8604eb3ffece34823931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: 200
+  max: 20
   currentText: {fileID: 279609253}
   mask: {fileID: 350446188}
 --- !u!114 &144198964
@@ -3023,7 +3023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4523711dfe6b8604eb3ffece34823931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: 200
+  max: 100
   currentText: {fileID: 1084762049}
   mask: {fileID: 294179865}
 --- !u!114 &177638519
@@ -5506,7 +5506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4523711dfe6b8604eb3ffece34823931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: 200
+  max: 100
   currentText: {fileID: 264756584}
   mask: {fileID: 329823652}
 --- !u!114 &311199082
@@ -10943,7 +10943,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Saved!
+  m_Text: Exiting!
 --- !u!222 &728671046
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11864,7 +11864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4523711dfe6b8604eb3ffece34823931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: 200
+  max: 100
   currentText: {fileID: 1211233865}
   mask: {fileID: 751094732}
 --- !u!114 &754346481
@@ -15825,7 +15825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4523711dfe6b8604eb3ffece34823931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: 200
+  max: 100
   currentText: {fileID: 714418729}
   mask: {fileID: 1826405595}
 --- !u!114 &994303280
@@ -15917,7 +15917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4523711dfe6b8604eb3ffece34823931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: 9999
+  max: 5000
   currentText: {fileID: 2117476041}
   mask: {fileID: 1659385707}
 --- !u!114 &997177863
@@ -23493,7 +23493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4523711dfe6b8604eb3ffece34823931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: 9999
+  max: 50
   currentText: {fileID: 1187803128}
   mask: {fileID: 591755788}
 --- !u!114 &1543981285
@@ -23677,7 +23677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4523711dfe6b8604eb3ffece34823931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: 200
+  max: 20
   currentText: {fileID: 559437561}
   mask: {fileID: 1450819471}
 --- !u!114 &1550429196
@@ -24070,7 +24070,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -1800, y: 0}
+  m_AnchoredPosition: {x: -3600, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1594866088
@@ -28350,6 +28350,7 @@ MonoBehaviour:
   revoltPopup: {fileID: 2122859511}
   bankruptPopup: {fileID: 194888314}
   resignPopup: {fileID: 2131433174}
+  winPopup: {fileID: 906059694}
   sceneName: Main Menu
 --- !u!4 &1854092358
 Transform:
@@ -32095,7 +32096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4523711dfe6b8604eb3ffece34823931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: 9999
+  max: 50
   currentText: {fileID: 1396716181}
   mask: {fileID: 400240742}
 --- !u!114 &2118037831

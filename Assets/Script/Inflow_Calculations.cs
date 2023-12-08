@@ -37,6 +37,6 @@ public class Inflow_Calculations : MonoBehaviour
         float.TryParse(loans.text, out float loans_Value);
         float.TryParse(Assests.text, out float Assests_Value);
       
-        total.text = (exports_Value + (china + arabs + imf) / 1_000_000_000 + Assests_Value + (remit / 1_000_000_000)).ToString();
+        total.text = ((int)(exports_Value + (china + arabs + imf) / 1_000_000_000 + Assests_Value + (remit / 1_000_000_000))).ToString();
     }
 }

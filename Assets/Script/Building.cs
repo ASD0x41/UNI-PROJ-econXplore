@@ -81,7 +81,7 @@ public class Building : MonoBehaviour
             background[i].gameObject.SetActive(false);
             background[index].gameObject.SetActive(true);
         }
-        Debug.Log(index);
+        //Debug.Log(index);
     }
 
     public void Bback()
