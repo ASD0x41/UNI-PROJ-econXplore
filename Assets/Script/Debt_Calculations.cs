@@ -26,6 +26,6 @@ public class Debt_Calculations : MonoBehaviour
         govt.GetForeignDebtPayments(out double chinapay, out double arabspay, out double imfpay);
 
         Debt.text = ((int)(double.Parse(owedChina.text) + double.Parse(owedArabs.text) + double.Parse(owedIMF.text))).ToString();
-        Repayment.text = ((int)(chinapay + arabspay + imfpay) / 1_000_000_000).ToString();
+        Repayment.text = ((int)((chinapay + arabspay + imfpay) / 1_000_000_000)).ToString();
     }
 }

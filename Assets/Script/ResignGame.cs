@@ -13,7 +13,7 @@ public class ResignGame : MonoBehaviour
     
     [SerializeField] private InCorrectPopup incorrectPopup;
    
-     public void Resigned()
+    public void Resigned()
     {
         incorrectPopup.gameObject.SetActive(true);
         incorrectPopup.Ok_button.onClick.AddListener(YesClicked);

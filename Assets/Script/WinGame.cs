@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using EMG;
 
 public class WinGame : MonoBehaviour
 {
@@ -11,12 +12,20 @@ public class WinGame : MonoBehaviour
     
     public string sceneName;
     
-    [SerializeField] private InCorrectPopup incorrectPopup;
+    [SerializeField] private InCorrectPopup savePopup;
+
+    IGame game = Game.GetInstance();
+
+
    
-     public void Winner()
+     public void SaveExit()
     {
-        incorrectPopup.gameObject.SetActive(true);
-        incorrectPopup.Ok_button.onClick.AddListener(YesClicked);
+
+        game.Exit();
+        // SAVE & EXIT
+        Debug.Log("Almost done!");
+        savePopup.gameObject.SetActive(true);
+        savePopup.Ok_button.onClick.AddListener(YesClicked);
     }
     private void YesClicked()
     {

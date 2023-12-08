@@ -28,7 +28,7 @@ public class Page1_Variables : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        govt.GetTradeDetails(out double imports, out double exports);
+        govt.GetTradeDetails(out double imports, out double exports, out double remit);
         govt.GetForeignDebtPayments(out double chinaout, out double arabsout, out double imfout);
         govt.GetForeignDebtReceipts(out double chinain, out double arabsin, out double imfin);
         govt.GetForeignInterestPayments(out double china, out double arabs, out double imf);
@@ -36,6 +36,9 @@ public class Page1_Variables : MonoBehaviour
         ExportsText.text = ((int)(exports / 1_000_000_000)).ToString();
         SalesText.text = ((int)(govt.GetAssetSales()  / 1_000_000_000)).ToString();
         LoansText.text = ((int)((chinain + arabsin + imfin) / 1_000_000_000)).ToString();
+        //Debug.Log(chinain);
+        //Debug.Log(arabsin);
+        //Debug.Log(imfin);
         ImportsText.text = ((int)(imports / 1_000_000_000)).ToString();
         InterestText.text = ((int)((china + arabs + imf) / 1_000_000_000)).ToString();
         DebtText.text = ((int)((chinaout + arabsout + imfout) / 1_000_000_000)).ToString();
