@@ -26,7 +26,7 @@ public class CurrencyMarket : MonoBehaviour
     void Update()
     {
         govt.GetCurrencyExchangeDetails(out double treasuryBal, out double dollarRate, out double forexBal);
-        DollarrateText.text = "Rs. " + dollarRate.ToString();
+        DollarrateText.text = "Rs. " + ((int)dollarRate).ToString();
     }
     
     public void ConverttoDollar()
@@ -34,7 +34,7 @@ public class CurrencyMarket : MonoBehaviour
         if(CurrencyInput.text != "")
         {
         float CurrencyInputValue = float.Parse(CurrencyInput.text);
-        govt.TradeForex(CurrencyInputValue);
+        govt.TradeForex(CurrencyInputValue * 1_000_000_000);
         }
     }
 
@@ -43,7 +43,7 @@ public class CurrencyMarket : MonoBehaviour
         if(CurrencyInput.text != "")
         {
         float CurrencyInputValue = float.Parse(CurrencyInput.text);
-        govt.TradeForex(-CurrencyInputValue);
+        govt.TradeForex(-CurrencyInputValue * 1_000_000_000);
         }
     }
 

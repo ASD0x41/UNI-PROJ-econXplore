@@ -13,6 +13,7 @@ public class EndTurn : MonoBehaviour
     [SerializeField] private InCorrectPopup revoltPopup;
     [SerializeField] private InCorrectPopup bankruptPopup;
     [SerializeField] private InCorrectPopup resignPopup;
+    [SerializeField] private InCorrectPopup winPopup;
     public string sceneName;
 
     // Start is called before the first frame update
@@ -33,19 +34,19 @@ public class EndTurn : MonoBehaviour
         TurnText.text = game.GetTurn().ToString();
         if (game.CheckVictory())
         {
-
+            winPopup.gameObject.SetActive(true);
+            winPopup.Ok_button.onClick.AddListener(YesClicked);
         }
         if (game.CheckRevolt())
         {
-            //revoltPopup.gameObject.SetActive(true);
-            //revoltPopup.Ok_button.onClick.AddListener(YesClicked);
+            revoltPopup.gameObject.SetActive(true);
+            revoltPopup.Ok_button.onClick.AddListener(YesClicked);
         }
         if (game.CheckBankruptcy())
         {
             bankruptPopup.gameObject.SetActive(true);
             bankruptPopup.Ok_button.onClick.AddListener(YesClicked);
         }
-        // make all buttons valid again
     }
 
     private void YesClicked()

@@ -58,7 +58,7 @@ public class Page3_Variables : MonoBehaviour
         ImportDuty.text = ((int)(duties / 1_000_000_000)).ToString();
         Privatization.text = ((int)(privatisationProceeds / 1_000_000_000)).ToString();
         Fines.text = ((int)(raidProceeds / 1_000_000_000)).ToString();
-        LocalLoans.text = ((int)(debtTaken / 1_000_000_000)).ToString();
+        LocalLoans.text = ((int)(debtTaken * 10 / 1_000_000_000)).ToString();
         Salaries.text = ((int)(salaries / 1_000_000_000)).ToString();
         Subsidies.text = ((int)(subsidies / 1_000_000_000)).ToString();
         Welfare.text = ((int)(welfare / 1_000_000_000)).ToString();

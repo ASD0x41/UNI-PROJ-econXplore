@@ -23,10 +23,10 @@ public class LevelManager : MonoBehaviour
     {
         MyDb mydb = MyDb.GetInstance();
         input = inputField.text;
-        Debug.Log("hello, here I am.");
+        //Debug.Log("hello, here I am.");
         //if (input == "1234")
-        //if (input == "1234" || input == "4321" || input == "0000" || input == "1122")
-        if (mydb.CheckPin(input) == 1)
+        if (input == "1234" || input == "4321" || input == "0000" || input == "1122")
+        //if (mydb.CheckPin(input) == 1)
         {
             game.SetKey(input);
             changeScene();

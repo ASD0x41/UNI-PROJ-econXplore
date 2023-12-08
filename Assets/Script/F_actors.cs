@@ -72,10 +72,6 @@ public class F_actors : MonoBehaviour
                 // take button shows up as pressed, repay button shows up as released
                 
             }
-            else
-            {
-                // invalid value entered popup
-            }
         }
     }
 
@@ -89,10 +85,6 @@ public class F_actors : MonoBehaviour
                 govtC.ManageChineseDebt(-double.Parse(inputField.text) * 1_000_000_000);
                 // repay button shows up as pressed, take button shows up as released
             }
-            else
-            {
-                // invalid value entered popup
-            }
         }
     }
 
@@ -105,10 +97,7 @@ public class F_actors : MonoBehaviour
             {
                 govtI.ManageIMFDebt(double.Parse(inputField.text) * 1_000_000_000 );
                 // take button shows up as pressed, repay button shows up as released
-            }
-            else
-            {
-                // invalid value entered popup
+                //Debug.Log("in takeIMF func");
             }
         }
     }
@@ -123,10 +112,6 @@ public class F_actors : MonoBehaviour
                 govtI.ManageIMFDebt(-double.Parse(inputField.text) * 1_000_000_000);
                 // repay button shows up as pressed, take button shows up as released
             }
-            else
-            {
-                // invalid value entered popup
-            }
         }
     }
 
@@ -139,10 +124,6 @@ public class F_actors : MonoBehaviour
             {
                 govtA.ManageArabDebt(double.Parse(inputField.text) * 1_000_000_000);
                 // take button shows up as pressed, repay button shows up as released
-            }
-            else
-            {
-                // invalid value entered popup
             }
         }
     }
@@ -157,10 +138,6 @@ public class F_actors : MonoBehaviour
                 govtA.ManageArabDebt(-double.Parse(inputField.text) * 1_000_000_000);
                 // repay button shows up as pressed, take button shows up as released
             }
-            else
-            {
-                // invalid value entered popup
-            }
         }
     }
 
@@ -174,10 +151,6 @@ public class F_actors : MonoBehaviour
                 govtL.ManageLocalDebt(double.Parse(inputField.text) * 1_000_000_000);
                 // take button shows up as pressed, repay button shows up as released
             }
-            else
-            {
-                // invalid value entered popup
-            }
         }
     }
 
@@ -190,10 +163,6 @@ public class F_actors : MonoBehaviour
             {
                 govtL.ManageLocalDebt(-double.Parse(inputField.text) * 1_000_000_000);
                 // repay button shows up as pressed, take button shows up as released
-            }
-            else
-            {
-                // invalid value entered popup
             }
         }
     }
@@ -232,7 +201,7 @@ public class F_actors : MonoBehaviour
             repay.GetComponent<Button>().interactable = true;
             var colors = take.GetComponent<Button>().colors;
             colors.selectedColor = Color.white; 
-            colors.normalColor = Color.white; 
+            colors.normalColor = Color.white;
             take.GetComponent<Button>().colors = colors;
         }
         else
