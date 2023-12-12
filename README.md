@@ -1,7 +1,5 @@
-# EMG-1
- Economy Management Game (Version 1)
-
-# [University Project] econXplore - an economy management game (Unity)
+# [University Project] econXplore (Unity)
+## Economy Management Game
 FAST-NUCES-LHR: Software Design & Analysis Project (Group)
 ---
 ## Group Members:
